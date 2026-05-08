@@ -20,14 +20,15 @@ VueTorrent / qBittorrent 控制脚本
   支持登录、列出任务、添加 magnet/.torrent，并检查全局上传限速。
 
 默认配置：
-  VUETORRENT_PKG_ID    cloud.lazycat.app.vuetorrent
+  VUETORRENT_PKG_ID    cloud.lazycat.app.vuetorrent  # VueTorrent 默认应用 ID
   VUETORRENT_URL       http://app.<VUETORRENT_PKG_ID>.lzcx
   VUETORRENT_USERNAME  admin
   VUETORRENT_PASSWORD  adminadmin
   HC_USER_TICKET       应用互访使用的 X-HC-USER-TICKET
 
 懒猫应用互访：
-  标准地址是 http://app.<target-pkg-id>.lzcx，不是 vuetorrent.<微服名>.heiyu.space。
+  标准地址是 http://app.<target-app-id>.lzcx，不是 vuetorrent.<微服名>.heiyu.space。
+  VueTorrent 默认应用 ID 是 cloud.lazycat.app.vuetorrent。
   如果访问失败，请传入 --user-ticket，并检查 VueTorrent 是否已安装、已启动。
 
 用法：
@@ -49,7 +50,7 @@ VueTorrent / qBittorrent 控制脚本
 
 全局 / 登录参数：
   --url URL                     VueTorrent 地址
-  --pkg-id PKG_ID               VueTorrent 应用 package id，生成 http://app.<pkg-id>.lzcx
+  --pkg-id PKG_ID               VueTorrent 应用 ID，默认 cloud.lazycat.app.vuetorrent
   --username NAME               登录用户名
   --password PASS               登录密码
   --user-ticket TICKET          X-HC-USER-TICKET
