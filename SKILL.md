@@ -150,7 +150,7 @@ YTS 搜索失败时：
 
 VueTorrent 失败时：
 
-- 登录失败：说明账号密码、应用互访 URL、`X-HC-USER-TICKET` 或兼容旧测试入口的 `HC_AUTH_TOKEN` 可能不正确；同时提醒用户确认 VueTorrent 应用已安装并正在运行。
+- 登录失败：说明账号密码、应用互访 URL 或 `X-HC-USER-TICKET` 可能不正确；同时提醒用户确认 VueTorrent 应用已安装并正在运行。
 - 403：说明可能缺少或错误的 `X-HC-USER-TICKET`，应要求用户传递有效 ticket，并检查 VueTorrent 是否已安装、已启动。
 - 连接失败 / DNS 失败：说明 `http://app.<target-app-id>.lzcx` 无法访问，应要求用户检查 VueTorrent 应用 ID 是否正确、应用是否安装、是否启动；VueTorrent 默认应用 ID 是 `cloud.lazycat.app.vuetorrent`。
 - 添加失败：说明 magnet/torrent 可能无效，或 VueTorrent/qBittorrent 拒绝请求。
