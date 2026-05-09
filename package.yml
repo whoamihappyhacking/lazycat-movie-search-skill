@@ -1,0 +1,15 @@
+package: cloud.lazycat.app.movie-search-skill
+version: 0.1.0
+name: 懒猫微服电影搜索
+description: 提供一个可被小龙猫、Hermes Agent、Codex 等 Agent 导入的电影搜索 Skill，可搜索 YTS 资源并添加到 VueTorrent。
+author: whoamihappyhacking
+license: MIT
+homepage: https://github.com/whoamihappyhacking/lazycat-movie-search-skill
+min_os_version: 1.5.2
+locales:
+  zh-CN:
+    name: 懒猫微服电影搜索
+    description: 搜索电影资源，并在确认后添加到 VueTorrent 的 Agent Skill。
+  en-US:
+    name: Lazycat Movie Search
+    description: Agent Skill for searching movie torrents and adding selected magnets to VueTorrent.

@@ -1,0 +1,7 @@
+buildscript: sh build.sh
+manifest: ./lzc-manifest.yml
+contentdir: ./dist
+pkgout: ./
+resource_exports:
+  - kind: skills
+    source: ./resources/skills
