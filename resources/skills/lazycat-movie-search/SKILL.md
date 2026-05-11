@@ -96,7 +96,7 @@ description: Use when the user explicitly invokes 懒猫微服电影搜索, Lazy
 - 默认应用 ID：`cloud.lazycat.app.vuetorrent`
 - 用户名：`admin`
 - 密码：`adminadmin`
-- 用户票据：通过 `X-HC-USER-TICKET` 请求头传递
+- 系统票据：最新系统会自动注入 `X-HC-USER-TICKET`，Skill 不需要单独处理，也不要向用户索取 ticket。
 
 不要默认使用 `vuetorrent.<微服名>.heiyu.space` 这类公网域名做应用间访问。懒猫应用互访应走：
 
@@ -104,23 +104,22 @@ description: Use when the user explicitly invokes 懒猫微服电影搜索, Lazy
 http://app.<target-app-id>.lzcx
 ```
 
-如果访问 VueTorrent 失败，不要假设公网域名可用；应提示用户传递 `X-HC-USER-TICKET` 对应的 ticket，并检查 VueTorrent 应用是否已经安装、是否正在运行。VueTorrent 默认应用 ID 是 `cloud.lazycat.app.vuetorrent`。当前 skill 不负责生成 lpk，也不负责获取 ticket，只负责在用户提供 ticket 后按懒猫应用互访模型访问 VueTorrent。
+如果访问 VueTorrent 失败，不要假设公网域名可用；应提示用户检查 VueTorrent 应用是否已经安装、是否正在运行，并确认默认应用 ID `cloud.lazycat.app.vuetorrent` 是否正确。最新系统会自动注入 `X-HC-USER-TICKET`，Skill 不需要单独处理，也不要向用户索取 ticket。
 
-如果用户给了新的应用 ID、URL、账号、密码或 user ticket，应使用脚本参数：
+如果用户给了新的应用 ID、URL、账号或密码，应使用脚本参数：
 
 ```bash
 ./scripts/vuetorrent-api.sh \
   --pkg-id '<VUETORRENT_PKG_ID>' \
   --username '<USERNAME>' \
   --password '<PASSWORD>' \
-  --user-ticket '<X_HC_USER_TICKET>' \
   login
 ```
 
 也可以把这些参数用于其他命令：
 
 ```bash
-./scripts/vuetorrent-api.sh --pkg-id '<VUETORRENT_PKG_ID>' --user-ticket '<X_HC_USER_TICKET>' list
+./scripts/vuetorrent-api.sh --pkg-id '<VUETORRENT_PKG_ID>' list
 ```
 
 `--url '<URL>'` 只用于显式覆盖，例如调试或非懒猫环境。
@@ -150,8 +149,8 @@ YTS 搜索失败时：
 
 VueTorrent 失败时：
 
-- 登录失败：说明账号密码、应用互访 URL 或 `X-HC-USER-TICKET` 可能不正确；同时提醒用户确认 VueTorrent 应用已安装并正在运行。
-- 403：说明可能缺少或错误的 `X-HC-USER-TICKET`，应要求用户传递有效 ticket，并检查 VueTorrent 是否已安装、已启动。
+- 登录失败：说明账号密码或应用互访 URL 可能不正确；同时提醒用户确认 VueTorrent 应用已安装并正在运行。
+- 403：说明应用可能没有启动、应用 ID 不正确，或 VueTorrent 服务端拒绝请求；不要要求用户单独提供 ticket。
 - 连接失败 / DNS 失败：说明 `http://app.<target-app-id>.lzcx` 无法访问，应要求用户检查 VueTorrent 应用 ID 是否正确、应用是否安装、是否启动；VueTorrent 默认应用 ID 是 `cloud.lazycat.app.vuetorrent`。
 - 添加失败：说明 magnet/torrent 可能无效，或 VueTorrent/qBittorrent 拒绝请求。
 - 上传限速设置失败：说明任务可以继续，但建议用户稍后检查 VueTorrent 设置。

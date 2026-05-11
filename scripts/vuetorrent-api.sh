@@ -5,8 +5,6 @@ VUETORRENT_PKG_ID="${VUETORRENT_PKG_ID:-cloud.lazycat.app.vuetorrent}"
 BASE_URL="${VUETORRENT_URL:-http://app.${VUETORRENT_PKG_ID}.lzcx}"
 USERNAME="${VUETORRENT_USERNAME:-admin}"
 PASSWORD="${VUETORRENT_PASSWORD:-adminadmin}"
-HC_USER_TICKET="${HC_USER_TICKET:-${X_HC_USER_TICKET:-${LZC_HC_USER_TICKET:-}}}"
-HC_AUTH_TOKEN="${HC_AUTH_TOKEN:-}"
 COOKIE_JAR="${VUETORRENT_COOKIE_JAR:-${TMPDIR:-/tmp}/vuetorrent-api.sid}"
 DEFAULT_UP_LIMIT_BYTES=131072
 OUTPUT="summary"
@@ -24,12 +22,10 @@ VueTorrent / qBittorrent 控制脚本
   VUETORRENT_URL       http://app.<VUETORRENT_PKG_ID>.lzcx
   VUETORRENT_USERNAME  admin
   VUETORRENT_PASSWORD  adminadmin
-  HC_USER_TICKET       应用互访使用的 X-HC-USER-TICKET
-
 懒猫应用互访：
   标准地址是 http://app.<target-app-id>.lzcx，不是 vuetorrent.<微服名>.heiyu.space。
   VueTorrent 默认应用 ID 是 cloud.lazycat.app.vuetorrent。
-  如果访问失败，请传入 --user-ticket，并检查 VueTorrent 是否已安装、已启动。
+  系统会自动注入 X-HC-USER-TICKET，不需要单独处理，也不要向用户索取。
 
 用法：
   ./vuetorrent-api.sh [global options] login [login options]
@@ -53,8 +49,6 @@ VueTorrent / qBittorrent 控制脚本
   --pkg-id PKG_ID               VueTorrent 应用 ID，默认 cloud.lazycat.app.vuetorrent
   --username NAME               登录用户名
   --password PASS               登录密码
-  --user-ticket TICKET          X-HC-USER-TICKET
-  --hc-token TOKEN              兼容旧测试入口的 HC-Auth-Token cookie
   --cookie-jar PATH             SID cookie 保存路径
 
 添加参数：
@@ -73,8 +67,8 @@ VueTorrent / qBittorrent 控制脚本
 
 示例：
   ./vuetorrent-api.sh login
-  ./vuetorrent-api.sh login --pkg-id cloud.lazycat.app.vuetorrent --user-ticket '<ticket>'
-  ./vuetorrent-api.sh --pkg-id cloud.lazycat.app.vuetorrent --user-ticket '<ticket>' list
+  ./vuetorrent-api.sh login --pkg-id cloud.lazycat.app.vuetorrent
+  ./vuetorrent-api.sh --pkg-id cloud.lazycat.app.vuetorrent list
   ./vuetorrent-api.sh --url 'http://app.cloud.lazycat.app.vuetorrent.lzcx' list
   ./vuetorrent-api.sh list downloading
   ./vuetorrent-api.sh completed
@@ -83,7 +77,7 @@ VueTorrent / qBittorrent 控制脚本
   ./vuetorrent-api.sh upload-limit
 
 配置示例：
-  VUETORRENT_PKG_ID='cloud.lazycat.app.vuetorrent' HC_USER_TICKET='<ticket>' ./vuetorrent-api.sh list
+  VUETORRENT_PKG_ID='cloud.lazycat.app.vuetorrent' ./vuetorrent-api.sh list
   VUETORRENT_USERNAME=admin VUETORRENT_PASSWORD=adminadmin ./vuetorrent-api.sh login
 EOF
 }
@@ -106,8 +100,6 @@ apply_global_option() {
     --pkg-id) need_value "$1" "${2:-}"; VUETORRENT_PKG_ID="$2"; BASE_URL="http://app.${VUETORRENT_PKG_ID}.lzcx"; return 0 ;;
     --username) need_value "$1" "${2:-}"; USERNAME="$2"; return 0 ;;
     --password) need_value "$1" "${2:-}"; PASSWORD="$2"; return 0 ;;
-    --user-ticket) need_value "$1" "${2:-}"; HC_USER_TICKET="$2"; return 0 ;;
-    --hc-token) need_value "$1" "${2:-}"; HC_AUTH_TOKEN="$2"; return 0 ;;
     --cookie-jar) need_value "$1" "${2:-}"; COOKIE_JAR="$2"; return 0 ;;
     *) return 1 ;;
   esac
@@ -116,7 +108,7 @@ apply_global_option() {
 parse_global_options() {
   while (($#)); do
     case "$1" in
-      --url|--pkg-id|--username|--password|--user-ticket|--hc-token|--cookie-jar)
+      --url|--pkg-id|--username|--password|--cookie-jar)
         apply_global_option "$1" "${2:-}"
         shift 2
         ;;
@@ -131,7 +123,7 @@ parse_global_options() {
 parse_login_options() {
   while (($#)); do
     case "$1" in
-      --url|--pkg-id|--username|--password|--user-ticket|--hc-token|--cookie-jar)
+      --url|--pkg-id|--username|--password|--cookie-jar)
         apply_global_option "$1" "${2:-}"
         shift 2
         ;;
@@ -152,8 +144,6 @@ api_url() {
 
 curl_base() {
   local -a args=(-fsS -H 'accept: application/json, text/plain, */*')
-  [[ -n "$HC_USER_TICKET" ]] && args+=(-H "X-HC-USER-TICKET: ${HC_USER_TICKET}")
-  [[ -n "$HC_AUTH_TOKEN" ]] && args+=(-b "HC-Auth-Token=${HC_AUTH_TOKEN}")
   curl "${args[@]}" "$@"
 }
 

@@ -7,78 +7,211 @@
     <style>
       :root {
         color-scheme: light dark;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f5f7fb;
+        color: #172033;
       }
+      * { box-sizing: border-box; }
       body {
         margin: 0;
-        padding: 40px 20px;
-        background: #f6f7f8;
-        color: #1f2933;
+        min-height: 100vh;
+        background: #f5f7fb;
       }
-      main {
-        max-width: 760px;
+      header {
+        background: #152033;
+        color: #fff;
+        padding: 44px 24px 38px;
+      }
+      .wrap {
+        width: min(980px, 100%);
         margin: 0 auto;
-        background: #fff;
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        padding: 28px;
+      }
+      .eyebrow {
+        margin: 0 0 10px;
+        color: #8ee0b7;
+        font-size: 14px;
+        font-weight: 700;
       }
       h1 {
-        margin: 0 0 12px;
-        font-size: 28px;
+        margin: 0;
+        font-size: clamp(30px, 5vw, 52px);
+        line-height: 1.08;
+        letter-spacing: 0;
+      }
+      .lead {
+        max-width: 720px;
+        margin: 16px 0 0;
+        color: #d7deea;
+        font-size: 17px;
+        line-height: 1.7;
+      }
+      main {
+        padding: 28px 24px 48px;
+      }
+      section {
+        margin: 0 auto 22px;
+        width: min(980px, 100%);
+      }
+      .panel {
+        background: #fff;
+        border: 1px solid #dfe7f2;
+        border-radius: 8px;
+        padding: 24px;
       }
       h2 {
-        margin-top: 28px;
-        font-size: 18px;
+        margin: 0 0 16px;
+        font-size: 22px;
+      }
+      h3 {
+        margin: 0 0 8px;
+        font-size: 17px;
+      }
+      p {
+        line-height: 1.7;
+      }
+      .steps {
+        display: grid;
+        gap: 14px;
+        counter-reset: step;
+      }
+      .step {
+        display: grid;
+        grid-template-columns: 42px 1fr;
+        gap: 14px;
+        align-items: start;
+        border: 1px solid #e4ebf4;
+        border-radius: 8px;
+        padding: 16px;
+        background: #fbfdff;
+      }
+      .step::before {
+        counter-increment: step;
+        content: counter(step);
+        width: 32px;
+        height: 32px;
+        display: inline-grid;
+        place-items: center;
+        border-radius: 50%;
+        background: #1f7a55;
+        color: #fff;
+        font-weight: 800;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .note {
+        border-left: 4px solid #1f7a55;
+        padding: 12px 14px;
+        background: #eefaf4;
+        border-radius: 6px;
       }
       code, pre {
-        background: #f1f5f9;
+        background: #edf2f7;
         border-radius: 6px;
       }
       code {
-        padding: 2px 5px;
+        padding: 2px 6px;
       }
       pre {
         overflow-x: auto;
         padding: 14px;
+        margin: 10px 0 0;
+        line-height: 1.55;
+      }
+      ul {
+        padding-left: 20px;
       }
       li {
         margin: 8px 0;
+        line-height: 1.65;
+      }
+      @media (max-width: 720px) {
+        header { padding-top: 32px; }
+        .grid { grid-template-columns: 1fr; }
+        .panel { padding: 18px; }
       }
       @media (prefers-color-scheme: dark) {
-        body {
-          background: #0f172a;
-          color: #e5e7eb;
-        }
-        main {
-          background: #111827;
-          border-color: #263244;
-        }
-        code, pre {
-          background: #1f2937;
-        }
+        :root, body { background: #0f172a; color: #e5e7eb; }
+        header { background: #0b1120; }
+        .lead { color: #cbd5e1; }
+        .panel, .step { background: #111827; border-color: #273449; }
+        .step { background: #111c2f; }
+        .note { background: #10251f; }
+        code, pre { background: #1f2937; }
       }
     </style>
   </head>
   <body>
+    <header>
+      <div class="wrap">
+        <p class="eyebrow">Lazycat Skill 应用</p>
+        <h1>懒猫微服电影搜索</h1>
+        <p class="lead">给小龙猫、Hermes Agent、Codex 等 Agent 使用的电影搜索 Skill。它会搜索电影资源，列出可用分辨率和种子热度，并在你确认后添加到 VueTorrent。</p>
+      </div>
+    </header>
+
     <main>
-      <h1>懒猫微服电影搜索</h1>
-      <p>这是一个面向小龙猫、Hermes Agent、Codex 等 Agent 的 Skill 资源应用。</p>
-      <p>安装后，懒猫微服会导出 <code>lazycat-movie-search</code> Skill，Agent 可以发现并读取它。</p>
+      <section class="panel">
+        <h2>安装教程</h2>
+        <div class="steps">
+          <div class="step">
+            <div>
+              <h3>先安装 VueTorrent</h3>
+              <p>打开懒猫应用商店，安装并启动 <strong>VueTorrent</strong>。这是实际管理下载任务的应用。</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>确认默认应用 ID</h3>
+              <p>本 Skill 默认访问 <code>cloud.lazycat.app.vuetorrent</code>。如果你的 VueTorrent 应用 ID 不同，在 Agent 使用时告诉它新的应用 ID。</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>安装本 Skill 应用</h3>
+              <p>安装这个 LPK 后，系统会导出 <code>lazycat-movie-search</code> Skill，兼容的 Agent 可以发现并读取它。</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>用中文开始搜索</h3>
+              <p>打开小龙猫、Hermes Agent 或其他支持 Skill 的 Agent，直接说出你要找的电影和分辨率。</p>
+              <pre>使用懒猫微服电影搜索，帮我找加勒比海盗 1080p</pre>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <h2>能做什么</h2>
-      <ul>
-        <li>搜索电影资源，列出可用分辨率、大小、Seeds/Peers。</li>
-        <li>生成并展示 torrent 下载链接和 magnet 链接。</li>
-        <li>在用户确认后添加到 VueTorrent/qBittorrent。</li>
-        <li>访问 VueTorrent 失败时，提示检查 ticket、应用 ID、安装和启动状态。</li>
-      </ul>
+      <section class="grid">
+        <div class="panel">
+          <h2>它会做什么</h2>
+          <ul>
+            <li>搜索电影并列出候选结果。</li>
+            <li>展示 720p、1080p、2160p 等可用分辨率。</li>
+            <li>显示大小、Seeds、Peers、torrent 链接和 magnet 链接。</li>
+            <li>询问你选择哪一部、哪个分辨率。</li>
+            <li>确认后添加到 VueTorrent，并默认启用顺序下载。</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h2>访问说明</h2>
+          <p>应用间访问使用懒猫标准地址：</p>
+          <pre>http://app.cloud.lazycat.app.vuetorrent.lzcx</pre>
+          <p class="note">最新系统会自动注入 <code>X-HC-USER-TICKET</code> 请求头，Skill 不需要单独处理，也不需要向用户索取 ticket。</p>
+        </div>
+      </section>
 
-      <h2>示例提示词</h2>
-      <pre>使用懒猫微服电影搜索，帮我找加勒比海盗 1080p</pre>
-
-      <h2>默认 VueTorrent 应用 ID</h2>
-      <pre>cloud.lazycat.app.vuetorrent</pre>
+      <section class="panel">
+        <h2>常见问题</h2>
+        <ul>
+          <li><strong>提示连不上 VueTorrent：</strong>先检查 VueTorrent 是否已安装、是否正在运行、应用 ID 是否为 <code>cloud.lazycat.app.vuetorrent</code>。</li>
+          <li><strong>搜索没有结果：</strong>换中文名、英文名、年份或 IMDb ID 再试一次。</li>
+          <li><strong>添加失败：</strong>可能是 magnet 无效、VueTorrent 未登录，或 qBittorrent 拒绝了请求。</li>
+          <li><strong>上传限速：</strong>Skill 会检查 VueTorrent 全局上传限速；如果未设置，会自动设为 128 KiB/s。</li>
+        </ul>
+      </section>
     </main>
   </body>
 </html>
