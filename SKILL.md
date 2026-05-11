@@ -5,6 +5,14 @@ description: Use when the user explicitly invokes 懒猫微服电影搜索, Lazy
 
 # 懒猫微服电影搜索
 
+## 版本
+
+当前 Skill 版本：`0.1.0`
+
+变更记录：
+
+- `0.1.0`：初始可安装版本。支持 YTS 电影搜索、VueTorrent 添加任务、懒猫应用互访地址、LPK Skill 资源导出，以及最新系统自动注入 `X-HC-USER-TICKET` 的运行模型。
+
 ## 目标
 
 当用户提到 **懒猫微服电影搜索** 或 **Lazy Cat Movie Search** 并要求搜索电影时，用中文完成这个流程：
