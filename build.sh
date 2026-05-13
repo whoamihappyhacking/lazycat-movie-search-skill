@@ -13,3 +13,4 @@ cp -R scripts "$skill_dir/scripts"
 chmod +x "$skill_dir/scripts/"*.sh
 
 mkdir -p dist
+cp lazycat-movie-search-skill-icon.png dist/icon.png

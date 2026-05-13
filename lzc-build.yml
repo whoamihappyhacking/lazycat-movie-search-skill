@@ -2,6 +2,7 @@ buildscript: sh build.sh
 manifest: ./lzc-manifest.yml
 contentdir: ./dist
 pkgout: ./
+icon: ./lazycat-movie-search-skill-icon.png
 resource_exports:
   - kind: skills
     source: ./resources/skills

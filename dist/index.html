@@ -34,6 +34,19 @@
         font-size: 14px;
         font-weight: 800;
       }
+      .hero-top {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+      .app-icon {
+        width: 76px;
+        height: 76px;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+      }
       h1 {
         margin: 0;
         font-size: clamp(34px, 6vw, 58px);
@@ -151,6 +164,8 @@
       }
       @media (max-width: 760px) {
         header { padding-top: 34px; }
+        .hero-top { align-items: flex-start; }
+        .app-icon { width: 62px; height: 62px; border-radius: 15px; }
         .grid { grid-template-columns: 1fr; }
         .panel { padding: 19px; }
         .step { grid-template-columns: 42px 1fr; }
@@ -172,7 +187,10 @@
   <body>
     <header>
       <div class="wrap">
-        <p class="eyebrow">给小龙猫使用的电影下载 Skill</p>
+        <div class="hero-top">
+          <img class="app-icon" src="./icon.png" alt="懒猫微服电影搜索图标" />
+          <p class="eyebrow">给小龙猫使用的电影下载 Skill</p>
+        </div>
         <h1>口喷一句话，让小龙猫帮你找电影并加入下载</h1>
         <p class="lead">这是一个面向小龙猫的技能资源应用。它会帮你搜索电影资源，列出可用分辨率和种子热度，在你确认后把 magnet 添加到 VueTorrent。</p>
       </div>
