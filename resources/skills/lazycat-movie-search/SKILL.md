@@ -7,10 +7,11 @@ description: Use when the user explicitly invokes 懒猫微服电影搜索, Lazy
 
 ## 版本
 
-当前 Skill 版本：`0.1.0`
+当前 Skill 版本：`0.1.1`
 
 变更记录：
 
+- `0.1.1`：优化 LPK 前端教程页，突出小龙猫口喷下载电影的使用方式和“咒语”；更新最新系统自动注入 `X-HC-USER-TICKET` 的说明，不再要求用户提供 ticket。
 - `0.1.0`：初始可安装版本。支持 YTS 电影搜索、VueTorrent 添加任务、懒猫应用互访地址、LPK Skill 资源导出，以及最新系统自动注入 `X-HC-USER-TICKET` 的运行模型。
 
 ## 目标

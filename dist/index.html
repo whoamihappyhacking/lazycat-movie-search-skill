@@ -8,66 +8,87 @@
       :root {
         color-scheme: light dark;
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: #f5f7fb;
-        color: #172033;
+        background: #f4f6fb;
+        color: #162033;
       }
       * { box-sizing: border-box; }
       body {
         margin: 0;
         min-height: 100vh;
-        background: #f5f7fb;
+        background:
+          radial-gradient(circle at 18% 0%, rgba(39, 122, 85, 0.16), transparent 34%),
+          linear-gradient(180deg, #f7fafc 0%, #eef3f8 100%);
       }
       header {
-        background: #152033;
+        background: #101827;
         color: #fff;
-        padding: 44px 24px 38px;
+        padding: 48px 24px 40px;
       }
       .wrap {
-        width: min(980px, 100%);
+        width: min(1040px, 100%);
         margin: 0 auto;
       }
       .eyebrow {
-        margin: 0 0 10px;
-        color: #8ee0b7;
+        margin: 0 0 12px;
+        color: #9df0bd;
         font-size: 14px;
-        font-weight: 700;
+        font-weight: 800;
       }
       h1 {
         margin: 0;
-        font-size: clamp(30px, 5vw, 52px);
-        line-height: 1.08;
+        font-size: clamp(34px, 6vw, 58px);
+        line-height: 1.05;
         letter-spacing: 0;
       }
       .lead {
-        max-width: 720px;
-        margin: 16px 0 0;
-        color: #d7deea;
-        font-size: 17px;
-        line-height: 1.7;
+        max-width: 780px;
+        margin: 18px 0 0;
+        color: #d9e2ef;
+        font-size: 18px;
+        line-height: 1.75;
       }
       main {
-        padding: 28px 24px 48px;
+        padding: 28px 24px 54px;
       }
       section {
+        width: min(1040px, 100%);
         margin: 0 auto 22px;
-        width: min(980px, 100%);
       }
       .panel {
-        background: #fff;
-        border: 1px solid #dfe7f2;
+        background: rgba(255, 255, 255, 0.94);
+        border: 1px solid #dce5ef;
         border-radius: 8px;
-        padding: 24px;
+        padding: 26px;
+        box-shadow: 0 10px 34px rgba(22, 32, 51, 0.06);
       }
       h2 {
         margin: 0 0 16px;
-        font-size: 22px;
+        font-size: 24px;
       }
       h3 {
         margin: 0 0 8px;
-        font-size: 17px;
+        font-size: 18px;
       }
       p {
-        line-height: 1.7;
+        line-height: 1.72;
+      }
+      .spell {
+        border: 1px solid #b8dcc7;
+        background: #ecfff4;
+        border-radius: 8px;
+        padding: 22px;
+      }
+      .spell-label {
+        margin: 0 0 10px;
+        color: #17613f;
+        font-size: 14px;
+        font-weight: 900;
+      }
+      .spell-text {
+        margin: 0;
+        font-size: clamp(22px, 4vw, 34px);
+        font-weight: 900;
+        line-height: 1.35;
       }
       .steps {
         display: grid;
@@ -76,30 +97,30 @@
       }
       .step {
         display: grid;
-        grid-template-columns: 42px 1fr;
-        gap: 14px;
+        grid-template-columns: 48px 1fr;
+        gap: 16px;
         align-items: start;
-        border: 1px solid #e4ebf4;
+        border: 1px solid #e3ebf4;
         border-radius: 8px;
-        padding: 16px;
+        padding: 18px;
         background: #fbfdff;
       }
       .step::before {
         counter-increment: step;
         content: counter(step);
-        width: 32px;
-        height: 32px;
+        width: 36px;
+        height: 36px;
         display: inline-grid;
         place-items: center;
         border-radius: 50%;
         background: #1f7a55;
         color: #fff;
-        font-weight: 800;
+        font-weight: 900;
       }
       .grid {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 16px;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 18px;
       }
       .note {
         border-left: 4px solid #1f7a55;
@@ -108,7 +129,7 @@
         border-radius: 6px;
       }
       code, pre {
-        background: #edf2f7;
+        background: #eef2f7;
         border-radius: 6px;
       }
       code {
@@ -119,6 +140,7 @@
         padding: 14px;
         margin: 10px 0 0;
         line-height: 1.55;
+        white-space: pre-wrap;
       }
       ul {
         padding-left: 20px;
@@ -127,17 +149,21 @@
         margin: 8px 0;
         line-height: 1.65;
       }
-      @media (max-width: 720px) {
-        header { padding-top: 32px; }
+      @media (max-width: 760px) {
+        header { padding-top: 34px; }
         .grid { grid-template-columns: 1fr; }
-        .panel { padding: 18px; }
+        .panel { padding: 19px; }
+        .step { grid-template-columns: 42px 1fr; }
       }
       @media (prefers-color-scheme: dark) {
         :root, body { background: #0f172a; color: #e5e7eb; }
-        header { background: #0b1120; }
+        body { background: #0f172a; }
+        header { background: #0a1020; }
         .lead { color: #cbd5e1; }
         .panel, .step { background: #111827; border-color: #273449; }
         .step { background: #111c2f; }
+        .spell { background: #0e2a1d; border-color: #2c6f4c; }
+        .spell-label { color: #8ee0b7; }
         .note { background: #10251f; }
         code, pre { background: #1f2937; }
       }
@@ -146,39 +172,44 @@
   <body>
     <header>
       <div class="wrap">
-        <p class="eyebrow">Lazycat Skill 应用</p>
-        <h1>懒猫微服电影搜索</h1>
-        <p class="lead">给小龙猫、Hermes Agent、Codex 等 Agent 使用的电影搜索 Skill。它会搜索电影资源，列出可用分辨率和种子热度，并在你确认后添加到 VueTorrent。</p>
+        <p class="eyebrow">给小龙猫使用的电影下载 Skill</p>
+        <h1>口喷一句话，让小龙猫帮你找电影并加入下载</h1>
+        <p class="lead">这是一个面向小龙猫的技能资源应用。它会帮你搜索电影资源，列出可用分辨率和种子热度，在你确认后把 magnet 添加到 VueTorrent。</p>
       </div>
     </header>
 
     <main>
+      <section class="spell">
+        <p class="spell-label">真正下载电影的咒语</p>
+        <p class="spell-text">使用懒猫微服电影搜索，帮我找加勒比海盗 1080p，并添加到 VueTorrent</p>
+      </section>
+
       <section class="panel">
-        <h2>安装教程</h2>
+        <h2>使用教程</h2>
         <div class="steps">
           <div class="step">
             <div>
-              <h3>先安装 VueTorrent</h3>
-              <p>打开懒猫应用商店，安装并启动 <strong>VueTorrent</strong>。这是实际管理下载任务的应用。</p>
+              <h3>第一步：先安装 VueTorrent</h3>
+              <p>打开懒猫应用商店，安装并启动 <strong>VueTorrent</strong>。VueTorrent 是真正负责下载和管理任务的应用。</p>
             </div>
           </div>
           <div class="step">
             <div>
-              <h3>确认默认应用 ID</h3>
-              <p>本 Skill 默认访问 <code>cloud.lazycat.app.vuetorrent</code>。如果你的 VueTorrent 应用 ID 不同，在 Agent 使用时告诉它新的应用 ID。</p>
+              <h3>第二步：安装这个 Skill 应用</h3>
+              <p>安装本 LPK 后，系统会导出 <code>lazycat-movie-search</code> 技能资源，小龙猫可以发现并读取它。</p>
             </div>
           </div>
           <div class="step">
             <div>
-              <h3>安装本 Skill 应用</h3>
-              <p>安装这个 LPK 后，系统会导出 <code>lazycat-movie-search</code> Skill，兼容的 Agent 可以发现并读取它。</p>
+              <h3>第三步：打开小龙猫，念出咒语</h3>
+              <p>在小龙猫里直接说你想看的电影、系列名和分辨率。小龙猫会先列出候选项，等你确认后再添加下载。</p>
+              <pre>使用懒猫微服电影搜索，帮我找黑客帝国 1080p</pre>
             </div>
           </div>
           <div class="step">
             <div>
-              <h3>用中文开始搜索</h3>
-              <p>打开小龙猫、Hermes Agent 或其他支持 Skill 的 Agent，直接说出你要找的电影和分辨率。</p>
-              <pre>使用懒猫微服电影搜索，帮我找加勒比海盗 1080p</pre>
+              <h3>第四步：选择资源并确认下载</h3>
+              <p>小龙猫会展示电影名、年份、720p/1080p/2160p、大小、Seeds/Peers。你只要回复“选第 2 个 1080p”即可。</p>
             </div>
           </div>
         </div>
@@ -186,30 +217,31 @@
 
       <section class="grid">
         <div class="panel">
-          <h2>它会做什么</h2>
+          <h2>你可以这样说</h2>
           <ul>
-            <li>搜索电影并列出候选结果。</li>
-            <li>展示 720p、1080p、2160p 等可用分辨率。</li>
-            <li>显示大小、Seeds、Peers、torrent 链接和 magnet 链接。</li>
-            <li>询问你选择哪一部、哪个分辨率。</li>
-            <li>确认后添加到 VueTorrent，并默认启用顺序下载。</li>
+            <li>使用懒猫微服电影搜索，帮我找加勒比海盗系列 1080p。</li>
+            <li>使用懒猫微服电影搜索，搜索黑客帝国 4K。</li>
+            <li>使用懒猫微服电影搜索，找 The Matrix 1999，优先 1080p。</li>
+            <li>使用懒猫微服电影搜索，查看 VueTorrent 正在下载的任务。</li>
           </ul>
         </div>
         <div class="panel">
-          <h2>访问说明</h2>
-          <p>应用间访问使用懒猫标准地址：</p>
+          <h2>默认配置</h2>
+          <p>VueTorrent 默认应用 ID：</p>
+          <pre>cloud.lazycat.app.vuetorrent</pre>
+          <p>应用间访问地址：</p>
           <pre>http://app.cloud.lazycat.app.vuetorrent.lzcx</pre>
-          <p class="note">最新系统会自动注入 <code>X-HC-USER-TICKET</code> 请求头，Skill 不需要单独处理，也不需要向用户索取 ticket。</p>
+          <p class="note">最新系统会自动注入 <code>X-HC-USER-TICKET</code>，不需要用户手动提供 ticket。</p>
         </div>
       </section>
 
       <section class="panel">
-        <h2>常见问题</h2>
+        <h2>遇到问题怎么办</h2>
         <ul>
-          <li><strong>提示连不上 VueTorrent：</strong>先检查 VueTorrent 是否已安装、是否正在运行、应用 ID 是否为 <code>cloud.lazycat.app.vuetorrent</code>。</li>
-          <li><strong>搜索没有结果：</strong>换中文名、英文名、年份或 IMDb ID 再试一次。</li>
-          <li><strong>添加失败：</strong>可能是 magnet 无效、VueTorrent 未登录，或 qBittorrent 拒绝了请求。</li>
-          <li><strong>上传限速：</strong>Skill 会检查 VueTorrent 全局上传限速；如果未设置，会自动设为 128 KiB/s。</li>
+          <li><strong>小龙猫说连不上 VueTorrent：</strong>检查 VueTorrent 是否已安装、是否已启动。</li>
+          <li><strong>应用 ID 不对：</strong>默认是 <code>cloud.lazycat.app.vuetorrent</code>，如果你安装的是其他版本，请把新的应用 ID 告诉小龙猫。</li>
+          <li><strong>搜不到电影：</strong>换中文名、英文名、年份或 IMDb ID 试试。</li>
+          <li><strong>添加失败：</strong>可能是 magnet 无效、VueTorrent 登录失败，或 qBittorrent 拒绝了任务。</li>
         </ul>
       </section>
     </main>
