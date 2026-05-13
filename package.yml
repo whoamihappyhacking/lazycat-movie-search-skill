@@ -1,5 +1,5 @@
 package: cloud.lazycat.app.movie-search-skill
-version: 0.1.1
+version: 0.1.2
 name: 懒猫微服电影搜索
 description: 提供一个可被小龙猫、Hermes Agent、Codex 等 Agent 导入的电影搜索 Skill，可搜索 YTS 资源并添加到 VueTorrent。
 author: whoamihappyhacking

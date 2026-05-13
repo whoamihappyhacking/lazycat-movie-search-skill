@@ -1,6 +1,6 @@
 interface:
   display_name: "懒猫微服电影搜索"
   short_description: "搜索电影并添加到 VueTorrent"
-  default_prompt: "使用 $lazy-cat-movie-search 搜索一部电影，选择合适分辨率并添加到 VueTorrent。"
+  default_prompt: "使用 $lazycat-movie-search 搜索一部电影，选择合适分辨率并添加到 VueTorrent。"
 policy:
   allow_implicit_invocation: true
